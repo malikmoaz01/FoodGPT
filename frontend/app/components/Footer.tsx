@@ -1,4 +1,18 @@
+import Link from 'next/link';
+
 export default function Footer() {
+  const productLinks = [
+    { label: 'Features', href: '/features' },
+    { label: 'Pricing', href: '/pricing' },
+    { label: 'Changelog', href: '/changelog' },
+  ];
+
+  const companyLinks = [
+    { label: 'About', href: '/about' },
+    { label: 'Blog', href: '/blog' },
+    { label: 'Contact', href: '/contact' },
+  ];
+
   return (
     <footer className="border-t border-pistachio-100/50 bg-cream-dark/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -18,23 +32,35 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Links */}
+          {/* Product Links */}
           <div>
             <h4 className="text-sm font-semibold text-foreground/80 mb-3">Product</h4>
             <ul className="space-y-2 text-sm text-foreground/50">
-              {["Features", "Pricing", "API", "Changelog"].map((l) => (
-                <li key={l}>
-                  <a href="#" className="hover:text-pistachio-600 transition-colors">{l}</a>
+              {productLinks.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
+                    className="hover:text-pistachio-600 transition-colors"
+                  >
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
+
+          {/* Company Links */}
           <div>
             <h4 className="text-sm font-semibold text-foreground/80 mb-3">Company</h4>
             <ul className="space-y-2 text-sm text-foreground/50">
-              {["About", "Blog", "Careers", "Contact"].map((l) => (
-                <li key={l}>
-                  <a href="#" className="hover:text-pistachio-600 transition-colors">{l}</a>
+              {companyLinks.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
+                    className="hover:text-pistachio-600 transition-colors"
+                  >
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
