@@ -66,12 +66,12 @@ Database (User & Recipe Storage)
 
 **Frontend**
 
-* React / Next.js
+* Next.js
 * Tailwind CSS
 
 **Backend**
 
-* Node.js / FastAPI (API layer)
+* FastAPI (API layer)
 
 **AI Services**
 
