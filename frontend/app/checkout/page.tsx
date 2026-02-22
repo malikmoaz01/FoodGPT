@@ -2,7 +2,6 @@
 
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 
@@ -13,8 +12,16 @@ const stripePromise = loadStripe(
 function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
-  const searchParams = useSearchParams();
-  const plan = searchParams.get('plan') || 'pro';
+
+  // Read `plan` from the URL on the client to avoid useSearchParams SSR/Suspense issues
+  const [plan, setPlan] = useState<'pro' | 'chef'>('pro');
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const sp = new URLSearchParams(window.location.search);
+    const p = sp.get('plan');
+    setPlan(p === 'chef' ? 'chef' : 'pro');
+  }, []);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
